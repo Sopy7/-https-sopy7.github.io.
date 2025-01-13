@@ -5,51 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Life Timeline</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <header>
         <h1>My Life</h1>
-        <p>A cozy journey from 2009 to 2025 🌟</p>
+        <p>Explore my journey from 2009 to 2025 🌟</p>
     </header>
-    <main class="timeline-container">
-        <!-- Timeline Starts -->
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="timeline-year">2009</span>
-                <div class="timeline-content">
-                    <h2>The Beginning</h2>
-                    <p>The year it all started! A time of discovery and new beginnings.</p>
-                </div>
+    <main>
+        <!-- Timeline Container -->
+        <div class="timeline-container">
+            <button class="arrow left-arrow" id="left-arrow">←</button>
+            <div class="timeline">
+                <div class="timeline-year" data-year="2009">2009</div>
+                <div class="timeline-year" data-year="2015">2015</div>
+                <div class="timeline-year" data-year="2020">2020</div>
+                <div class="timeline-year" data-year="2025">2025</div>
             </div>
-            <div class="timeline-item">
-                <span class="timeline-year">2015</span>
-                <div class="timeline-content">
-                    <h2>Big Dreams</h2>
-                    <p>Learning, growing, and chasing big dreams during this era.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <span class="timeline-year">2020</span>
-                <div class="timeline-content">
-                    <h2>Adapting to Change</h2>
-                    <p>A year that challenged us all but taught resilience and growth.</p>
-                    <div class="photo">
-                        <img src="images/moment2020.jpg" alt="A memorable photo from 2020">
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <span class="timeline-year">2025</span>
-                <div class="timeline-content">
-                    <h2>The Future Awaits</h2>
-                    <p>The possibilities are endless. Here's to the adventures ahead! 🚀</p>
-                </div>
-            </div>
+            <button class="arrow right-arrow" id="right-arrow">→</button>
         </div>
-        <!-- Timeline Ends -->
+
+        <!-- Year Details -->
+        <section id="year-details" class="year-details hidden">
+            <div class="year-photo">
+                <img id="year-photo" src="" alt="Photo for the year">
+            </div>
+            <div class="year-description">
+                <h2 id="year-title"></h2>
+                <p id="year-text"></p>
+            </div>
+        </section>
     </main>
     <footer>
-       
+        <p>&copy; 2025 - My Life Timeline. Made with ❤️ and memories.</p>
     </footer>
 </body>
 </html>
