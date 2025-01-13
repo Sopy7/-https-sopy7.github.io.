@@ -4,142 +4,150 @@
     box-sizing: border-box;
 }
 
-body, html {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1e1e1e, #121212);
-    color: #e0e0e0;
-    overflow: hidden;
+html, body {
     height: 100%;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
 }
 
-.page-container {
+.main-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
-    padding: 20px;
+    height: 100%;
+    background: linear-gradient(to bottom, #0d0d0d, #1c1c1c);
+    color: #f5f5f5;
 }
 
 header {
     text-align: center;
-    margin-bottom: 10px;
+    padding: 20px 0;
+    background: linear-gradient(90deg, #ff6b6b, #ff9a9a);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
-    font-size: 3em;
-    color: #ff6b6b;
+    font-size: 3rem;
     margin-bottom: 10px;
-    animation: fadeIn 1s ease;
 }
 
 header p {
-    font-size: 1.5em;
-    color: #ffa69e;
-    animation: fadeIn 1.5s ease;
+    font-size: 1.5rem;
+    opacity: 0.8;
 }
 
 .timeline-container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 30%;
+    padding: 20px;
     position: relative;
-    overflow: hidden;
-    flex-grow: 1;
-    margin: 20px 0;
 }
 
 .arrow {
-    background: #333;
-    color: #e0e0e0;
-    border: none;
-    font-size: 2em;
-    padding: 15px 20px;
+    font-size: 2rem;
+    padding: 15px;
     cursor: pointer;
+    background: #333;
+    color: #fff;
+    border: none;
     border-radius: 50%;
-    transition: background 0.3s, transform 0.2s;
+    transition: transform 0.2s ease, background 0.3s ease;
 }
 
 .arrow:hover {
     background: #ff6b6b;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .timeline {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    gap: 20px;
-    padding: 10px 0;
-    position: relative;
-    max-width: 80%;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    overflow-x: auto;
+    flex: 1;
+    padding: 10px 20px;
+    background: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    scroll-behavior: smooth;
 }
 
 .timeline-year {
-    flex: 0 0 auto;
-    padding: 20px;
-    background: #333;
-    color: #e0e0e0;
-    border-radius: 10px;
+    min-width: 100px;
     text-align: center;
+    padding: 15px 10px;
+    background: #444;
+    color: #f5f5f5;
+    border-radius: 8px;
     cursor: pointer;
-    min-width: 150px;
-    transition: transform 0.3s, background 0.3s;
-    position: relative;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.timeline-year:hover,
-.timeline-year.selected {
+.timeline-year:hover, .timeline-year.selected {
     background: #ff6b6b;
+    color: #000;
     transform: scale(1.2);
-    color: #121212;
 }
 
 .year-details {
-    display: none;
-    flex-direction: column;
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: #222;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 1s ease-in-out;
-    flex-grow: 1;
-}
-
-.year-details.visible {
-    display: flex;
-}
-
-.content-wrapper {
     text-align: center;
+    background: linear-gradient(90deg, #222, #444);
+    padding: 30px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border-top: 2px solid #ff6b6b;
 }
 
-.content-wrapper h2 {
-    font-size: 2.5em;
+.year-details.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    pointer-events: none;
+}
+
+.year-content {
+    max-width: 800px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.year-content h2 {
+    font-size: 2.5rem;
     color: #ff6b6b;
-    margin-bottom: 15px;
-}
-
-.content-wrapper p {
-    font-size: 1.2em;
     margin-bottom: 20px;
-    color: #e0e0e0;
 }
 
-.content-wrapper img {
-    max-width: 80%;
+.year-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.year-content img {
+    max-width: 100%;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #111;
+    color: #aaa;
+    font-size: 0.9rem;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
