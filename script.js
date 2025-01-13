@@ -1,77 +1,88 @@
 const years = [
     {
         year: "2009",
-        title: "The Beginning",
-        text: "The year it all started! A time of discovery and new beginnings.",
-        photo: "images/2009.jpg"
+        title: "A Star is Born",
+        text: "In 2009, a bright star was born into the world, bringing joy and love to everyone around.",
+        photo: "images/2009.jpg",
+    },
+    {
+        year: "2010",
+        title: "First Steps",
+        text: "By 2010, those tiny feet started to explore the world, taking wobbly but determined steps.",
+        photo: "images/2010.jpg",
     },
     {
         year: "2015",
-        title: "Big Dreams",
-        text: "Learning, growing, and chasing big dreams during this era.",
-        photo: "images/2015.jpg"
+        title: "School Days Begin",
+        text: "The first day of school! A big milestone marked with excitement, curiosity, and a new backpack.",
+        photo: "images/2015.jpg",
     },
     {
         year: "2020",
-        title: "Adapting to Change",
-        text: "A year that challenged us all but taught resilience and growth.",
-        photo: "images/2020.jpg"
+        title: "Resilience Through Challenges",
+        text: "2020 was a year of challenges, but it taught resilience and adaptability like never before.",
+        photo: "images/2020.jpg",
     },
     {
         year: "2025",
         title: "The Future Awaits",
-        text: "The possibilities are endless. Here's to the adventures ahead! 🚀",
-        photo: "images/2025.jpg"
+        text: "The journey so far has been incredible, and the future holds endless possibilities. Here's to achieving dreams!",
+        photo: "images/2025.jpg",
     },
 ];
 
-let currentYearIndex = 0;
+let currentIndex = 0;
 
-// DOM Elements
-const timeline = document.querySelector('.timeline');
-const yearDetails = document.getElementById('year-details');
-const yearTitle = document.getElementById('year-title');
-const yearText = document.getElementById('year-text');
-const yearPhoto = document.getElementById('year-photo');
-const leftArrow = document.getElementById('left-arrow');
-const rightArrow = document.getElementById('right-arrow');
-const timelineYears = document.querySelectorAll('.timeline-year');
+const timeline = document.querySelector(".timeline");
+const yearDetails = document.getElementById("year-details");
+const yearTitle = document.getElementById("year-title");
+const yearText = document.getElementById("year-text");
+const leftArrow = document.getElementById("left-arrow");
+const rightArrow = document.getElementById("right-arrow");
+
+// Dynamically Add Years to Timeline
+years.forEach(({ year }) => {
+    const yearDiv = document.createElement("div");
+    yearDiv.classList.add("timeline-year");
+    yearDiv.textContent = year;
+    yearDiv.dataset.year = year;
+    timeline.appendChild(yearDiv);
+});
 
 // Update Year Details
-function updateYearDetails(yearIndex) {
-    const yearData = years[yearIndex];
-    yearTitle.textContent = yearData.title;
-    yearText.textContent = yearData.text;
-    yearPhoto.src = yearData.photo;
-    yearDetails.classList.remove('hidden');
+function updateYearDetails(index) {
+    const { year, title, text, photo } = years[index];
+    yearTitle.textContent = `${year} - ${title}`;
+    yearText.textContent = text;
+    yearDetails.style.backgroundImage = `url('${photo}')`;
+
+    document.querySelectorAll(".timeline-year").forEach((el, i) => {
+        el.classList.toggle("selected", i === index);
+    });
+
+    yearDetails.classList.remove("hidden");
+    currentIndex = index;
 }
 
 // Handle Year Click
-timeline.addEventListener('click', (e) => {
-    if (e.target.classList.contains('timeline-year')) {
+timeline.addEventListener("click", (e) => {
+    if (e.target.classList.contains("timeline-year")) {
         const selectedYear = e.target.dataset.year;
-        const yearIndex = years.findIndex((y) => y.year === selectedYear);
-        updateYearDetails(yearIndex);
-
-        // Update Selected Style
-        timelineYears.forEach((y) => y.classList.remove('selected'));
-        e.target.classList.add('selected');
+        const index = years.findIndex(({ year }) => year === selectedYear);
+        updateYearDetails(index);
     }
 });
 
-// Handle Arrows
+// Navigate Timeline with Arrows
 function navigateTimeline(direction) {
-    currentYearIndex += direction;
-
-    // Loop around if necessary
-    if (currentYearIndex < 0) currentYearIndex = years.length - 1;
-    if (currentYearIndex >= years.length) currentYearIndex = 0;
-
-    timeline.scrollBy({
-        left: direction * 150,
-        behavior: 'smooth',
-    });
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = years.length - 1;
+    if (currentIndex >= years.length) currentIndex = 0;
+    updateYearDetails(currentIndex);
 }
 
-leftArrow.addEventListener('click', () => navigateTimeline(-1));
-rightArrow.addEventListener('click', () => navigateTimeline(1));
+leftArrow.addEventListener("click", () => navigateTimeline(-1));
+rightArrow.addEventListener("click", () => navigateTimeline(1));
+
+// Load the Initial Year
+updateYearDetails(0);
