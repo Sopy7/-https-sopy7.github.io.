@@ -1,3 +1,4 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +9,24 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Arial', sans-serif;
+    background: #FFC1A1; /* Default cozy background for 2009 */
+    color: #333;
+    transition: background 0.5s ease-in-out;
 }
 
+/* Main Layout */
 .main-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    background: linear-gradient(to bottom, #0d0d0d, #1c1c1c);
-    color: #f5f5f5;
+    background: inherit;
 }
 
 header {
     text-align: center;
     padding: 20px 0;
-    background: linear-gradient(90deg, #ff6b6b, #ff9a9a);
+    background: linear-gradient(90deg, #333, #444);
     color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -30,17 +34,24 @@ header {
 header h1 {
     font-size: 3rem;
     margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 header p {
     font-size: 1.5rem;
     opacity: 0.8;
+    margin-top: 10px;
+    font-style: italic;
 }
 
+/* Timeline Container */
 .timeline-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 30%;
     padding: 20px;
     position: relative;
@@ -54,12 +65,14 @@ header p {
     color: #fff;
     border: none;
     border-radius: 50%;
-    transition: transform 0.2s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .arrow:hover {
     background: #ff6b6b;
     transform: scale(1.2);
+    color: #000;
 }
 
 .timeline {
@@ -74,6 +87,7 @@ header p {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     scroll-behavior: smooth;
+    transition: background 0.3s ease-in-out;
 }
 
 .timeline-year {
@@ -84,25 +98,39 @@ header p {
     color: #f5f5f5;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.timeline-year:hover, .timeline-year.selected {
+.timeline-year:hover {
     background: #ff6b6b;
     color: #000;
-    transform: scale(1.2);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
+.timeline-year.selected {
+    background: #ffcccb;
+    color: #000;
+    transform: scale(1.3);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    font-size: 1.2rem;
+}
+
+/* Year Details Section */
 .year-details {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(90deg, #222, #444);
+    background: linear-gradient(90deg, #fff, #f7f7f7);
     padding: 30px;
+    border-top: 4px solid #ff6b6b;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    border-top: 2px solid #ff6b6b;
+    overflow: hidden;
 }
 
 .year-details.hidden {
@@ -114,33 +142,44 @@ header p {
 .year-content {
     max-width: 800px;
     animation: fadeIn 0.5s ease-in-out;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .year-content h2 {
     font-size: 2.5rem;
     color: #ff6b6b;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .year-content p {
     font-size: 1.2rem;
     margin-bottom: 20px;
+    line-height: 1.8;
+    color: #555;
 }
 
 .year-content img {
     max-width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding: 10px;
     background: #111;
     color: #aaa;
     font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
