@@ -1,9 +1,7 @@
 /*
    🦜 PARROT SIGNATURE 🦜
 
-   Crafted with 🖤 by Your Name
-
-   "Logic that flies as high as the parrot in the sky."
+   Crafted with 🖤 by sopy
 */
 
 const years = [
