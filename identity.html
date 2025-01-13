@@ -8,25 +8,28 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <h1>My Life Timeline</h1>
-        <p>Explore my journey from 2009 to 2025 🌟</p>
-    </header>
-    <main>
-        <div class="timeline-container">
+    <div class="main-container">
+        <header>
+            <h1>My Life Timeline</h1>
+            <p>A journey from 2009 to 2025 🌟</p>
+        </header>
+        <section class="timeline-container">
             <button class="arrow left-arrow" id="left-arrow">←</button>
-            <div class="timeline"></div>
+            <div class="timeline">
+                <!-- Years will be dynamically added here -->
+            </div>
             <button class="arrow right-arrow" id="right-arrow">→</button>
-        </div>
+        </section>
         <section id="year-details" class="year-details hidden">
-            <div class="year-description">
+            <div class="year-content">
                 <h2 id="year-title"></h2>
                 <p id="year-text"></p>
+                <img id="year-photo" src="" alt="Year Photo">
             </div>
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 - My Life Timeline. Made with ❤️ and memories.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 - My Life Timeline | Crafted with ❤️</p>
+        </footer>
+    </div>
 </body>
 </html>
