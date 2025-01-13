@@ -1,379 +1,60 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+const years = [
+    { year: "2009", title: "Born to Shine", text: "The beginning of a journey filled with potential.", themeColor: "#ffffff", subEvents: [{ title: "First Smile", text: "A small smile, the start of endless joy." }] },
+    { year: "2023", title: "A Life-Changing Year", text: "This was the year I found love.", themeColor: "#f5f5f7", subEvents: [{ title: "The First Meeting", text: "A sunny afternoon that changed everything." }] },
+    { year: "2025", title: "The Future Awaits", text: "Standing on the edge of infinite possibilities.", themeColor: "#e5e5ea", subEvents: [{ title: "Vision", text: "Ready to make dreams a reality." }] },
+];
+
+let currentIndex = 0;
+
+const timeline = document.querySelector(".timeline");
+const yearDetails = document.getElementById("year-details");
+const yearTitle = document.getElementById("year-title");
+const yearText = document.getElementById("year-text");
+const leftArrow = document.getElementById("left-arrow");
+const rightArrow = document.getElementById("right-arrow");
+
+years.forEach(({ year, themeColor }) => {
+    const yearDiv = document.createElement("div");
+    yearDiv.classList.add("timeline-year");
+    yearDiv.textContent = year;
+    yearDiv.dataset.year = year;
+    timeline.appendChild(yearDiv);
+});
+
+function updateYearDetails(index) {
+    const { year, title, text, themeColor, subEvents } = years[index];
+    yearTitle.textContent = `${year} - ${title}`;
+    yearText.innerHTML = text;
+    document.body.style.backgroundColor = themeColor;
+
+    const subEventContainer = document.getElementById("sub-events");
+    subEventContainer.innerHTML = "";
+    subEvents.forEach(({ title, text }) => {
+        const subEvent = document.createElement("div");
+        subEvent.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
+        subEventContainer.appendChild(subEvent);
+    });
+
+    document.querySelectorAll(".timeline-year").forEach((el, i) => {
+        el.classList.toggle("selected", i === index);
+    });
+
+    yearDetails.classList.remove("hidden");
 }
 
-html, body {
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(120deg, #1e1e2f, #14141f);
-    color: #f5f5f5;
-    overflow: hidden;
-    transition: background 0.5s ease-in-out;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-}
-
-header {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(to right, #ff6b6b, #ffc3a0);
-    color: #fff;
-}
-
-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-header p {
-    font-size: 1.2rem;
-    opacity: 0.8;
-}
-
-.timeline-container {
-    display: flex;
-    align-items: center;
-    height: 30%;
-    padding: 20px;
-}
-
-.arrow {
-    font-size: 2rem;
-    padding: 15px;
-    cursor: pointer;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.arrow:hover {
-    background: #ff6b6b;
-    transform: scale(1.2);
-    color: #000;
-}
-
-.timeline {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    flex: 1;
-    padding: 10px;
-    border-bottom: 2px solid #ff6b6b;
-}
-
-.timeline-year {
-    min-width: 100px;
-    text-align: center;
-    padding: 15px;
-    background: #444;
-    color: #f5f5f5;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.timeline-year:hover {
-    background: #ff6b6b;
-    color: #000;
-    transform: scale(1.1);
-}
-
-.timeline-year.selected {
-    background: #ffcccb;
-    transform: scale(1.3);
-}
-
-.year-details {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(90deg, #333, #444);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    overflow: hidden;
-}
-
-.year-details.hidden {
-    opacity: 0;
-    transform: translateY(50px);
-    pointer-events: none;
-}
-
-.year-content {
-    max-width: 800px;
-    animation: fadeIn 0.5s ease-in-out;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-}
-
-.year-content h2 {
-    font-size: 2rem;
-    color: #ff6b6b;
-    margin-bottom: 20px;
-}
-
-.year-content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-}
-
-.year-content img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.sub-events h4 {
-    margin: 10px 0 5px;
-    font-size: 1.1rem;
-    color: #333;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background: #111;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+timeline.addEventListener("click", (e) => {
+    if (e.target.classList.contains("timeline-year")) {
+        currentIndex = years.findIndex(({ year }) => year === e.target.dataset.year);
+        updateYearDetails(currentIndex);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+});
+
+function navigateTimeline(direction) {
+    currentIndex = (currentIndex + direction + years.length) % years.length;
+    updateYearDetails(currentIndex);
 }
 
-html, body {
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(120deg, #1e1e2f, #14141f);
-    color: #f5f5f5;
-    overflow: hidden;
-    transition: background 0.5s ease-in-out;
-}
+leftArrow.addEventListener("click", () => navigateTimeline(-1));
+rightArrow.addEventListener("click", () => navigateTimeline(1));
 
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-}
-
-header {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(to right, #ff6b6b, #ffc3a0);
-    color: #fff;
-    animation: fadeInDown 1s ease-in-out;
-}
-
-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-header p {
-    font-size: 1.2rem;
-    opacity: 0.8;
-}
-
-.timeline-container {
-    display: flex;
-    align-items: center;
-    height: 40%;
-    padding: 20px;
-}
-
-.arrow {
-    font-size: 2rem;
-    padding: 15px;
-    cursor: pointer;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    transition: transform 0.3s ease, background 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    animation: bounce 1.5s infinite ease-in-out;
-}
-
-.arrow:hover {
-    background: #ff6b6b;
-    transform: scale(1.2);
-    color: #000;
-}
-
-.timeline {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    flex: 1;
-    padding: 10px;
-    border-bottom: 2px solid #ff6b6b;
-    animation: fadeIn 1s ease-in-out;
-}
-
-.timeline-year {
-    min-width: 120px;
-    text-align: center;
-    padding: 15px;
-    background: #444;
-    color: #f5f5f5;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timeline-year:hover {
-    background: #ff6b6b;
-    color: #000;
-    transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
-}
-
-.timeline-year.selected {
-    background: #ffcccb;
-    transform: scale(1.3);
-    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.7);
-}
-
-.year-details {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(90deg, #333, #444);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    overflow: hidden;
-}
-
-.year-details.hidden {
-    opacity: 0;
-    transform: translateY(50px);
-    pointer-events: none;
-}
-
-.year-content {
-    max-width: 800px;
-    animation: fadeIn 0.5s ease-in-out;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-}
-
-.year-content h2 {
-    font-size: 2.5rem;
-    color: #ff6b6b;
-    margin-bottom: 20px;
-}
-
-.year-content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-}
-
-.year-content img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    animation: zoomIn 0.5s ease-in-out;
-}
-
-.sub-events {
-    margin-top: 20px;
-    animation: fadeInUp 0.5s ease-in-out;
-}
-
-.sub-events h4 {
-    margin: 10px 0 5px;
-    font-size: 1.1rem;
-    color: #333;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background: #111;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
+updateYearDetails(0);
