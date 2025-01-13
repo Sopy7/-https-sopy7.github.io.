@@ -8,63 +8,96 @@
 /* Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: #fdf6e3; /* Cozy beige */
-    color: #333;
-    line-height: 1.6;
-    padding: 0 20px;
+    background: #121212; /* Dark background */
+    color: #dcdcdc; /* Light text */
+    text-align: center;
+    padding: 20px;
 }
 
 /* Header */
-header {
-    text-align: center;
-    margin: 20px 0;
-    color: #6b4226; /* Warm brown */
-}
-
 header h1 {
     font-size: 2.5em;
+    color: #ff6b6b; /* Soft red */
     margin-bottom: 10px;
 }
 
 header p {
     font-size: 1.2em;
-    color: #8c5a2e; /* Soft brown */
+    color: #ffb3b3; /* Muted red */
+    margin-bottom: 20px;
 }
 
 /* Timeline Container */
 .timeline-container {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
     position: relative;
-    padding: 20px 0;
 }
 
-/* The Timeline Line */
+/* Arrows */
+.arrow {
+    background: #333;
+    color: #dcdcdc;
+    border: none;
+    font-size: 1.5em;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.arrow:hover {
+    background: #ff6b6b;
+}
+
+/* Timeline */
 .timeline {
-    position: relative;
-    padding-left: 40px;
-    border-left: 2px solid #d0a572; /* Warm orange */
-}
-
-.timeline-item {
-    margin-bottom: 30px;
-    position: relative;
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    max-width: 600px;
+    border-bottom: 2px solid #ff6b6b; /* Timeline line */
+    padding: 10px 0;
 }
 
 .timeline-year {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #8c5a2e;
-    background: #d0a572;
-    padding: 5px 10px;
-    border-radius: 15px;
-    position: absolute;
-    left: -55px;
-    top: 0;
-    transform: translateY(-50%);
+    padding: 10px 20px;
+    background: #333;
+    color: #dcdcdc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
 }
 
-.timeline-content {
-    padding: 10px 15px;
-    background: #fff;
-    border-radius:
+.timeline-year:hover,
+.timeline-year.selected {
+    background: #ff6b6b;
+    color: #000;
+}
+
+/* Year Details */
+.year-details {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.year-details.hidden {
+    display: none;
+}
+
+.year-photo img {
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.year-description h2 {
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
