@@ -1,60 +1,60 @@
-const years = [
-    { year: "2009", title: "Born to Shine", text: "The beginning of a journey filled with potential.", themeColor: "#ffffff", subEvents: [{ title: "First Smile", text: "A small smile, the start of endless joy." }] },
-    { year: "2023", title: "A Life-Changing Year", text: "This was the year I found love.", themeColor: "#f5f5f7", subEvents: [{ title: "The First Meeting", text: "A sunny afternoon that changed everything." }] },
-    { year: "2025", title: "The Future Awaits", text: "Standing on the edge of infinite possibilities.", themeColor: "#e5e5ea", subEvents: [{ title: "Vision", text: "Ready to make dreams a reality." }] },
+const universities = [
+    {
+        name: "Stanford University",
+        image: "https://via.placeholder.com/150",
+        link: "https://www.stanford.edu",
+        admissionRate: "4%",
+        specs: "Top engineering and business programs, located in California, USA.",
+    },
+    {
+        name: "University of Oxford",
+        image: "https://via.placeholder.com/150",
+        link: "https://www.ox.ac.uk",
+        admissionRate: "17%",
+        specs: "World-renowned research institution, located in Oxford, England.",
+    },
+    {
+        name: "University of Toronto",
+        image: "https://via.placeholder.com/150",
+        link: "https://www.utoronto.ca",
+        admissionRate: "43%",
+        specs: "Top Canadian university with diverse programs, located in Toronto, Canada.",
+    },
+    {
+        name: "National University of Singapore",
+        image: "https://via.placeholder.com/150",
+        link: "https://www.nus.edu.sg",
+        admissionRate: "27%",
+        specs: "Asia’s leading global university, located in Singapore.",
+    },
+    {
+        name: "ETH Zurich",
+        image: "https://via.placeholder.com/150",
+        link: "https://ethz.ch",
+        admissionRate: "22%",
+        specs: "Premier university for science and technology, located in Zurich, Switzerland.",
+    },
+    // Add more universities here...
 ];
 
-let currentIndex = 0;
+function generateResults() {
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = ""; // Clear previous results
 
-const timeline = document.querySelector(".timeline");
-const yearDetails = document.getElementById("year-details");
-const yearTitle = document.getElementById("year-title");
-const yearText = document.getElementById("year-text");
-const leftArrow = document.getElementById("left-arrow");
-const rightArrow = document.getElementById("right-arrow");
+    universities.forEach((uni) => {
+        const card = document.createElement("div");
+        card.className = "university-card";
 
-years.forEach(({ year, themeColor }) => {
-    const yearDiv = document.createElement("div");
-    yearDiv.classList.add("timeline-year");
-    yearDiv.textContent = year;
-    yearDiv.dataset.year = year;
-    timeline.appendChild(yearDiv);
-});
+        card.innerHTML = `
+            <img src="${uni.image}" alt="${uni.name}">
+            <div class="info">
+                <h3>${uni.name}</h3>
+                <p>Admission Rate: ${uni.admissionRate}</p>
+                <p>${uni.specs}</p>
+                <a href="${uni.link}" target="_blank">Visit Website</a>
+            </div>
+        `;
 
-function updateYearDetails(index) {
-    const { year, title, text, themeColor, subEvents } = years[index];
-    yearTitle.textContent = `${year} - ${title}`;
-    yearText.innerHTML = text;
-    document.body.style.backgroundColor = themeColor;
-
-    const subEventContainer = document.getElementById("sub-events");
-    subEventContainer.innerHTML = "";
-    subEvents.forEach(({ title, text }) => {
-        const subEvent = document.createElement("div");
-        subEvent.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
-        subEventContainer.appendChild(subEvent);
+        resultsDiv.appendChild(card);
     });
-
-    document.querySelectorAll(".timeline-year").forEach((el, i) => {
-        el.classList.toggle("selected", i === index);
-    });
-
-    yearDetails.classList.remove("hidden");
 }
-
-timeline.addEventListener("click", (e) => {
-    if (e.target.classList.contains("timeline-year")) {
-        currentIndex = years.findIndex(({ year }) => year === e.target.dataset.year);
-        updateYearDetails(currentIndex);
-    }
-});
-
-function navigateTimeline(direction) {
-    currentIndex = (currentIndex + direction + years.length) % years.length;
-    updateYearDetails(currentIndex);
-}
-
-leftArrow.addEventListener("click", () => navigateTimeline(-1));
-rightArrow.addEventListener("click", () => navigateTimeline(1));
-
-updateYearDetails(0);
