@@ -3,33 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Life Timeline</title>
+    <title>University Finder</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="main-container">
-        <header>
-            <h1>My Life Timeline</h1>
-            <p>A journey from 2009 to 2025 🌟</p>
-        </header>
-        <section class="timeline-container">
-            <button class="arrow left-arrow" id="left-arrow">←</button>
-            <div class="timeline">
-                <!-- Years will be dynamically added here -->
-            </div>
-            <button class="arrow right-arrow" id="right-arrow">→</button>
-        </section>
-        <section id="year-details" class="year-details hidden">
-            <div class="year-content">
-                <h2 id="year-title"></h2>
-                <p id="year-text"></p>
-                <img id="year-photo" src="" alt="Year Photo">
-            </div>
-        </section>
-        <footer>
-            <p>&copy; 2025 - My Life Timeline | Crafted with ❤️</p>
-        </footer>
+    <header>
+        <h1>University Finder</h1>
+    </header>
+
+    <div class="container">
+        <div class="test-section">
+            <h2>Take the Test</h2>
+            <form id="testForm">
+                <div class="question">
+                    <label>1. What is your preferred field of study?</label>
+                    <input type="text" name="field" required>
+                </div>
+                <div class="question">
+                    <label>2. What is your budget for annual tuition?</label>
+                    <input type="text" name="budget" required>
+                </div>
+                <div class="question">
+                    <label>3. Do you have a preferred location (state or region)?</label>
+                    <input type="text" name="location" required>
+                </div>
+                <button type="button" onclick="generateResults()">Get Recommendations</button>
+            </form>
+        </div>
+
+        <div class="results-section">
+            <h2>Results</h2>
+            <div id="results" class="results"></div>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
