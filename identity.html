@@ -9,33 +9,14 @@
 <body>
     <header>
         <h1>University Finder</h1>
+        <button id="themeToggle" class="theme-toggle">Switch Theme</button>
     </header>
-
-    <div class="container">
-        <div class="test-section">
-            <h2>Take the Test</h2>
-            <form id="testForm">
-                <div class="question">
-                    <label>1. What is your preferred field of study?</label>
-                    <input type="text" name="field" required>
-                </div>
-                <div class="question">
-                    <label>2. What is your budget for annual tuition?</label>
-                    <input type="text" name="budget" required>
-                </div>
-                <div class="question">
-                    <label>3. Do you have a preferred location (state or region)?</label>
-                    <input type="text" name="location" required>
-                </div>
-                <button type="button" onclick="generateResults()">Get Recommendations</button>
-            </form>
-        </div>
-
-        <div class="results-section">
-            <h2>Results</h2>
-            <div id="results" class="results"></div>
-        </div>
-    </div>
+    <nav>
+        <a href="#" onclick="showLandingPage()">Home</a>
+        <a href="#" onclick="showQuizPage()">Take the Quiz</a>
+        <a href="#" onclick="showSearchPage()">Search a University</a>
+    </nav>
+    <div class="container" id="content"></div>
 
     <script src="script.js"></script>
 </body>
